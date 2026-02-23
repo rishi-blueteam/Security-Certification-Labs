@@ -94,17 +94,17 @@ We first just over the surface view the security of the and safety of the site w
 
 > This does not mean if the site is using a HTTPS protocol itselfbut it also means that other than a secure protocol does the site use a valid certificate. and why is a valid certificate important..is what I will answer below.
 
-![Site Picture and Connection Secure]()
+![Site Picture and Connection Secure](https://github.com/rishi-blueteam/Security-Certification-Labs/blob/main/Screenshots/Domain%204/Site%20Screenshot%20%2B%20Connection%20Secure.png)
 
 - We first click the lock symbol or the button next to the referesh sign
 
-![Secure Lock SIgn Button]()
+![Secure Lock SIgn Button](https://github.com/rishi-blueteam/Security-Certification-Labs/blob/main/Screenshots/Domain%204/Secure%20Lock%20SIgn%20Button.png)
 
 - Go to connection is secure and see the certification is valid.
 
 - We click on certificate is valid and a new dynamic build in page for the Certifcate gets opened.
 
-![New Certificate page gets opened]()
+![New Certificate page gets opened](https://github.com/rishi-blueteam/Security-Certification-Labs/blob/main/Screenshots/Domain%204/New%20Certificate%20Page%20Gets%20Opened.png)
 
 ### Information to be Extracted
 
@@ -127,13 +127,13 @@ We first just over the surface view the security of the and safety of the site w
 
     PKCS #1 SHA-256 With RSA Encryption 
 
-    ![Subject, Issuer, Validity and Algo]()
+    ![Subject, Issuer, Validity and Algo](https://github.com/rishi-blueteam/Security-Certification-Labs/blob/main/Screenshots/Domain%204/Certificate%20Subject%2C%20Validity%2C%20and%20Algo.png)
 
 - **Public Key Size (2048-bit, 4096-bit):** 
     
     2048-bit
 
-    ![subject public key size]()
+    ![subject public key size](https://github.com/rishi-blueteam/Security-Certification-Labs/blob/main/Screenshots/Domain%204/Subject%20Public%20Key%20Size.png)
 
 - **Certificate Subject Alternative Name:**
     
@@ -143,14 +143,14 @@ We first just over the surface view the security of the and safety of the site w
     
     DNS Name: www.wifrizzy.com
     
-    ![SAN Image]()
+    ![SAN Image](https://github.com/rishi-blueteam/Security-Certification-Labs/blob/main/Screenshots/Domain%204/Subject%20Alternative%20Name.png)
 
 - **SHA-256: Public FIngerprint:**
     
     - **Certificate:** 8c52909cb38d657766cc4acdc16addf040c7a90a637a72789580bb81e49c94b2
     - **Public key:**	585c5ee3887801e2bcfda537d4138bc5c02df5ee97461e0f6fcf05293269d83d
     
-    ![SHA-256]()
+    ![SHA-256](https://github.com/rishi-blueteam/Security-Certification-Labs/blob/main/Screenshots/Domain%204/Subject%20Finger%20Print.png)
 
 
 ## Why is validted and Certified certificate from a CA important?
@@ -178,8 +178,6 @@ When a trusted SSL Digital Certificate is used during a HTTPS connection, users 
 
 We will now verify the credibility of certificate and gain the score of how the domain is actually ranked in terms of server security and identity.
 
-![Server Security Score]()
-
 This gives:
 
 - TLS version support
@@ -191,6 +189,10 @@ This gives:
 - Expiry warnings
 
 - Overall grade (A+, A, B, etc.)
+
+Verified Score of the website is:
+
+![Verified Site Score](https://github.com/rishi-blueteam/Security-Certification-Labs/blob/main/Screenshots/Domain%204/Certificate%20Report%20for%20Site%20Testing.png)
 
 ## Part 3: Investigation of a Non-Trusted Certificate
 
@@ -205,19 +207,19 @@ We are able to notice the following readings from the site:
 
 - Broswer Warning
 
-![Unsafe Site for poor ssl certification testing]()
+![Unsafe Site for poor ssl certification testing](https://github.com/rishi-blueteam/Security-Certification-Labs/blob/main/Screenshots/Domain%204/Un-Verified%20Certificate.png)
 
 - Organization and the Issuer are the same hence poor readings.
 
-![Self Registered]()
+![Self Registered](https://github.com/rishi-blueteam/Security-Certification-Labs/blob/main/Screenshots/Domain%204/Organization%20and%20Self%20Issued.png)
 
 - Trust Score of Website
 
-![Trust Score of Website]()
+![Trust Score of Website](https://github.com/rishi-blueteam/Security-Certification-Labs/blob/main/Screenshots/Domain%204/Un-Trusted%20Website%20Certificate%20Score.png)
 
 - Certification Path
 
-![Untrusted Certification Path of Website]()
+![Untrusted Certification Path of Website](https://github.com/rishi-blueteam/Security-Certification-Labs/blob/main/Screenshots/Domain%204/Un-Trusted%20Website%20Certification%20Path.png)
 
 
 # Blue Team Perspective
@@ -251,4 +253,5 @@ This shows us the importance of SSL/TLS certificate and how it is important to k
 - https://web.archive.org/web/20161213142308/https://www.instantssl.com/ssl-certificate-products/https.html 
 - https://www.serverion.com/uncategorized/ssl-tls-handshake-process-step-by-step-guide/
 - https://www.cloudflare.com/en-gb/learning/ssl/what-happens-in-a-tls-handshake/
+
 - https://www.manageengine.com/key-manager/information-center/what-is-ssl-tls-handshake.html 
