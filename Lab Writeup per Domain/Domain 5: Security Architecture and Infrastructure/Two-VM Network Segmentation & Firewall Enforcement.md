@@ -121,7 +121,7 @@ Different possible security at different level includes:
 
 >>"We ensure the DHCP is enabled because this takes away the hastle to assign IP address to every single device using a network IP. If we assign a range of subnets of an IP and ensure the DHCP is enabled, then every VM that is using the NAT Network will be having a particular subnet of the same ip assigned automatically."
 
-![NAT Setup]()
+![NAT Setup](https://github.com/rishi-blueteam/Security-Certification-Labs/blob/main/Screenshots/Domain%205/Setting%20Nat%20Network%20Up.png)
 
 - After setting the NAT for the VM then we ensure that each VM uses the "NAT Network" in their Network settings for this process to work. 
 
@@ -129,11 +129,11 @@ Different possible security at different level includes:
 
 **Target IP:**
 
-![Target IP SET]()
+![Target IP SET](https://github.com/rishi-blueteam/Security-Certification-Labs/blob/main/Screenshots/Domain%205/Target%20IP%20Set.png)
 
 **Attacker:**
 
-![Attacker IP set]()
+![Attacker IP set](https://github.com/rishi-blueteam/Security-Certification-Labs/blob/main/Screenshots/Domain%205/Attacker%20IP%20Set.png)
 
 ### Setting up Firewall, Verifying Status and Checking
 
@@ -143,29 +143,31 @@ Different possible security at different level includes:
 
 - It can either be enabled or not present for the system so, we first install it and then we enable it using the following command
 
-
 > apt-get install ufw -y
 
 > sudo ufw enable
 
-![Firewall enabled]()
+![UFW Firewall Download and enabled](https://github.com/rishi-blueteam/Security-Certification-Labs/blob/main/Screenshots/Domain%205/UFW%20Enable%20%26%20Download.png)
 
 > We will now set **deny** incoming, and set **allow** outgoing for the attacker machine. 
 
-![Verify Incoming and Outgoing Firewall Setting]()
+![Verify Incoming and Outgoing Firewall Setting](https://github.com/rishi-blueteam/Security-Certification-Labs/blob/main/Screenshots/Domain%205/VErify%20Incoming%20and%20Outgoing%20Status.png)
 
-- Let's disbale the ufw for attacker machine
 
 **Note:** Pinging the attacker from the Target Machine will allow us to ping, but why is that? UFW is a stateless firwall, it acts on packets, it acts on  Attacker machine has just denied the incoming connections from outside. It is because ping is a ICMP echo request that the stateless firewall does not prevent as we did not edit that rule as such seprately. 
+
+![Pinging Attacking Machine for which UFW was enabled](https://github.com/rishi-blueteam/Security-Certification-Labs/blob/main/Screenshots/Domain%205/Pinging%20Attacker.png)
+
+
+- Let's disbale the ufw for attacker machine
 
 - Let's test to see the UFW does any good to protect the target machine.
 
 - we enabled the UFW on the target machine with the same command we did for the attacker machine.
 
-- With the attacker machine we used nmap to do check for any open ports or for any open connections but, we will see that all the ports are filtered, and are in ignored state.
+- With the attacker machine we used **nmap** to do check for any open ports or for any open connections but, we will see that all the ports are filtered, and are in ignored state.
 
-
-![Target Machine blocked TCP connections]()
+![Target Machine blocked TCP connections](https://github.com/rishi-blueteam/Security-Certification-Labs/blob/main/Screenshots/Domain%205/Target%20Machine%20blocked%20TCP%20connections.png)
 
 >> Now we will enable the logging to be high so that we can capture the log packets of the firewall of the Target machine blocking the incoming connections.
 
@@ -175,7 +177,7 @@ Different possible security at different level includes:
 
 > sudo ufw set logging high
 
-![Logging High]()
+![Logging High](https://github.com/rishi-blueteam/Security-Certification-Labs/blob/main/Screenshots/Domain%205/UFW%20logging%20set%20High.png)
 
 - After we set logging high, now lets attack the target machine and let's get to business.
 
@@ -185,35 +187,35 @@ Different possible security at different level includes:
 
 - After researching, it was found to be noticed that the logs are stored at journalctl not just ufw but generally every log of the system itself.  
 
-![UFW logs on target machine noticed]()
+![UFW logs on target machine noticed](https://github.com/rishi-blueteam/Security-Certification-Labs/blob/main/Screenshots/Domain%205/UFW%20logs%20on%20target%20machine%20noticed.png)
 
-- I have collected the recent logs using the command and move them to a text file by saving it as a txt file.
-
-> journalctl tail -K -f | grep UFW  > ufw_log_recent.txt
-
-- I have verified it by running the txt file
-
-> cat ufw_log_recent.txt
-
-![output file of logs recent saved]()
-
-- NOw we will use TCPdump in the same machine but another terminal to see if our attacker is able to detect and see if any open ports are enabled or no by pinging to their respective ports.
+- NOw we will use TCPdump in the same machine but another terminal to see if our attacker is able to detect and see if any successfull tcp connections took place or no. This will be live and running until we mannualy end the connection.
 
 > sudo tcpdump -i enp0s3 host 10.0.2.15
 
-- We keep the UFW logging on and live waiting for the attacker to actually send an nmap noisy scan.
+![tcpdump working](https://github.com/rishi-blueteam/Security-Certification-Labs/blob/main/Screenshots/Domain%205/TCPDump%20Live%20and%20running%20with%20logs%20detected..png)
 
-> sudo ufw -k -f | grep UFW > 
+- Now, I have collected the recent logs of the UFW using the command and move them to a text file by saving it as a txt file. These will be recorded as live and hence directly when we print it we will get an output. Untill the can is over, and we do not **cat** the file we won't get the results. 
+
+> journalctl tail -K -f | grep UFW  > ufw_log_recent.txt 
+
+- I have verified it by running the txt file
+
+> cat UFW_final_output.txt
 
 > *The -f keeps the scan live and running*
 
-![UFW Log Scanning Stored to File]()
+![output file of logs recent saved](https://github.com/rishi-blueteam/Security-Certification-Labs/blob/main/Screenshots/Domain%205/output%20file%20of%20logs%20recent%20saved.png)
+
+- We keep the UFW logging on and live waiting for the attacker to actually send an nmap noisy scan.
+
+![UFW Log Scanning Stored to File](https://github.com/rishi-blueteam/Security-Certification-Labs/blob/main/Screenshots/Domain%205/UFW%20Log%20Scanning%20Stored%20to%20File.png)
 
 - The cursor is blinking means the firewall is activing and ready to log. 
 
 -TCPDump on other hand will just give us a confirmation that attacker doesn't have any hold of infomration to any ports of the attacker. 
 
-![tcpdump scn storing in a file]()
+![tcpdump scn storing in a file](https://github.com/rishi-blueteam/Security-Certification-Labs/blob/main/Screenshots/Domain%205/tcpdump%20scn%20storing%20in%20a%20file.png)
 
 - From the attacker machine we will send a nmap scan again to the target machine. 
 
@@ -224,17 +226,18 @@ Different possible security at different level includes:
 - We will be able to notice that the firewall is blocking in continous flow of the atttackers attempt to learn about the system, these are all stored on the file.
 
 
-![output for ufw logs]()
+![output for ufw logs](https://github.com/rishi-blueteam/Security-Certification-Labs/blob/main/Screenshots/Domain%205/UFW%20Log%20Output%20extracted..png)
 
 
 - The TCP dump output of the file can also be seen 
 
-![tcpdump logs output of a file]()
+![tcpdump logs output of a file](https://github.com/rishi-blueteam/Security-Certification-Labs/blob/main/Screenshots/Domain%205/tcpdump%20logs%20output%20of%20a%20file.png)
 
 
 ## Conclusion
 
 With this I have not only learnt about just firewalls, but learnt about the types of firewall, its implementation, on linux system too, network segmentation, logs monitoring and capturing, and tcpdump for packet capture and analysis.
+
 
 
 
